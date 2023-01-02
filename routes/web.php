@@ -23,7 +23,17 @@ Route::middleware("guest")
     ->name("auth.")
     ->group(function () {
         Route::get("login", [SignController::class, "login"])->name("login");
+        Route::post("login", [SignController::class, "login"]);
+
         Route::get("register", [SignController::class, "register"])->name(
             "register"
         );
+        Route::post("register", [SignController::class, "register"]);
+    });
+
+Route::middleware("auth")
+    ->prefix("auth")
+    ->name("auth.")
+    ->group(function () {
+        Route::get("logout", [SignController::class, "logout"])->name("logout");
     });
