@@ -1,0 +1,26 @@
+.form-sign {
+    border: 3px solid #555;
+    margin: 10% auto;
+    width: 50%;
+}
+
+.form-sign h1,
+p {
+    text-align: center;
+}
+
+.form-sign input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="submit"] {
+    font-size: 1.2em;
+    padding: 12px 20px;
+    margin: 20px 5%;
+    box-sizing: border-box;
+    width: 90%;
+}
+
+.form-sign input[type="email"]:focus,
+input[type="password"]:focus {
+    border: 3px solid #555;
+}

@@ -7,6 +7,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/nav.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sign.css') }}">
 </head>
 <body>
     @include('web.layouts.header')
