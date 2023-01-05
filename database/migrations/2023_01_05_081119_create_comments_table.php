@@ -12,8 +12,15 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::table("users", function (Blueprint $table) {
-            $table->boolean("superuser")->default(false);
+        Schema::create("comments", function (Blueprint $table) {
+            $table->id();
+
+            $table->mediumText("body");
+
+            $table->foreignId("post_id");
+            $table->foreignId("user_id");
+
+            $table->timestamps();
         });
     }
 
@@ -24,8 +31,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::table("users", function (Blueprint $table) {
-            $table->dropColumn("superuser");
-        });
+        Schema::dropIfExists("comments");
     }
 };

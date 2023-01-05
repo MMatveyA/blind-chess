@@ -3,36 +3,39 @@
 @section('title', 'Вход')
 
 @section('main')
-    <form class="form-sign" action="{{ route('auth.register') }}" method="POST">
-        @csrf
-        <h1>РЕГИСТРАЦИЯ</h1>
-        @if ($errors->any())
-            <div class="danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+    <div class="row">
+        <div class="w-50 mx-auto">
+            <form class="needs-validation" action="{{ route('auth.register') }}" method="POST">
+                @csrf
+                <legend>РЕГИСТРАЦИЯ</legend>
 
+                    <label class="form-label" for="name">Имя пользователя</label>
+                    <input type="text" id="name" name="name" placeholder="Имя пользователя" class="form-control @error('name') is-invalid @enderror">
+                    @error('name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
 
-        <input type="text" name="name" placeholder="Имя пользователя" class="@error('name') is-invalid @enderror" />
-        <br>
+                    <label class="form-label" for="email">Адрес электронной почты (email)</label>
+                    <input type="email" id="email" name="email" placeholder="Email" class="form-control @error('email') is-invalid @enderror">
+                    @error('email')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
 
-        <input type="email" name="email" placeholder="Email" class="@error('email') is-invalid @enderror" />
-        <br>
+                    <label class="form-label" for="password">Пароль</label>
+                    <input type="password" id="password" name="password" placeholder="Пароль" class="form-control @error('password') is-invalid @enderror" />
+                    @error('password')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
 
-        <input type="password" name="password" placeholder="Пароль" class="@error('password') is-invalid @enderror" />
-        <br>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="remember" name="remember_token" checked>
+                    <label class="form-check-label" for="remember">Запомнить меня</label>
+                </div>
 
-        <div class="remember">
-            <input type="checkbox" id="remeber" name="remeber" value="remeber">
-            <label for="remember">Запомнить меня</label>
+                <button class="btn btn-primary" type="submit">Войти</button>
+
+                <p>Уже зарегистрированы? <a href="{{ route('auth.login') }}">Войти</a></p>
+            </form>
         </div>
-
-        <input type="submit" value="Зарегистриоваться">
-
-        <p>Уже зарегистрированы? <a href="{{ route('auth.login') }}">Войти</a></p>
-    </form>
+    </div>
 @endsection

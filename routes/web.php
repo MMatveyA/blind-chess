@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SignController;
 use App\Http\Controllers\StaticController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,4 +39,25 @@ Route::middleware("auth")
     ->name("auth.")
     ->group(function () {
         Route::get("logout", [SignController::class, "logout"])->name("logout");
+    });
+
+Route::resources([
+    "post" => PostController::class,
+    "users" => UserController::class,
+]);
+
+Route::match(["get", "post"], "/uploader", [
+    App\Http\Controllers\CKEditorController::class,
+    "upload",
+])
+    ->name("uploader")
+    ->middleware("auth");
+
+Route::middleware("auth")
+    ->prefix("comment")
+    ->name("comment.")
+    ->group(function () {
+        Route::post("create", [CommentController::class, "create"])->name(
+            "create"
+        );
     });

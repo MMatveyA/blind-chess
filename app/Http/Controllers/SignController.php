@@ -19,7 +19,10 @@ class SignController extends Controller
             "email" => ["required", "email"],
             "password" => ["required"],
         ]);
-        if (Auth::attempt($credentials)) {
+        $remember_token = $request->validate([
+            "remember_token" => ["required"],
+        ]);
+        if (Auth::attempt($credentials, $remember_token)) {
             $request->session()->regenerate();
             return redirect()
                 ->intended("/")
@@ -47,15 +50,19 @@ class SignController extends Controller
 
         $credentials = $request->validate([
             "name" => ["required"],
-            "email" => ["required", "email"],
+            "email" => ["required", "email", "unique:users,email"],
             "password" => ["required"],
+        ]);
+        $remember_token = $request->validate([
+            "remember_token" => ["required"],
         ]);
 
         $credentials["password"] = Hash::make($credentials["password"]);
+        $credentials["superuser"] = false;
 
         $user = User::firstOrCreate($credentials);
-        Auth::login($user);
-        $request->session()->regenerate();
-        return redirect()->intended("/");
+        $user->save();
+
+        login($request);
     }
 }

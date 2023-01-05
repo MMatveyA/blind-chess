@@ -5,15 +5,15 @@
 }
 
 .form-sign h1,
-p {
+.form-sign p {
     text-align: center;
 }
 
 .form-sign input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="submit"],
-.remember {
+.form-sign input[type="email"],
+.form-sign input[type="password"],
+.form-sign input[type="submit"],
+.form-sign .remember {
     font-size: 1.2em;
     padding: 12px 20px;
     margin: 20px 5%;
@@ -22,7 +22,7 @@ input[type="submit"],
 }
 
 .form-sign input[type="email"]:focus,
-input[type="password"]:focus {
+.form-sign input[type="password"]:focus {
     border: 3px solid #555;
 }
 

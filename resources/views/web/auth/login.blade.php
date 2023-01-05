@@ -3,33 +3,34 @@
 @section('title', 'Вход')
 
 @section('main')
-    <form class="form-sign" action="{{ route('auth.login') }}" method="POST">
-        @csrf
-        <h1>ВХОД</h1>
+    <div class="row">
+        <div class="w-50 mx-auto">
+            <form class="needs-validation" action="{{ route('auth.login') }}" method="POST">
+                @csrf
+                <legend>ВХОД</legend>
 
-        @if ($errors->any())
-            <div class="danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+                    <label class="form-label" for="email">Адрес электронной почты (email)</label>
+                    <input type="email" id="email" name="email" placeholder="Email" class="form-control @error('email') is-invalid @enderror">
+                    @error('email')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
 
-        <input type="email" name="email" placeholder="Email" class="@error('email') is-invalid @enderror" />
-        <br>
+                    <label class="form-label" for="password">Пароль</label>
+                    <input type="password" id="password" name="password" placeholder="Пароль" class="form-control @error('password') is-invalid @enderror" />
+                    @error('password')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
 
-        <input type="password" name="password" placeholder="Пароль" class="@error('password') is-invalid @enderror" />
-        <br>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="remember" name="remember_token" checked>
+                    <label class="form-check-label" for="remember">Запомнить меня</label>
+                </div>
 
-        <div class="remember">
-            <input type="checkbox" id="remeber" name="remeber" value="remeber">
-            <label for="remember">Запомнить меня</label>
+                <button class="btn btn-primary" type="submit">Войти</button>
+
+                <p>Ещё не зарегистрированы? <a href="{{ route('auth.register') }}">Регистрация</a></p>
+            </form>
         </div>
+    </div>
 
-        <input type="submit" value="Войти">
-
-        <p>Ещё не зарегистрированы? <a href="{{ route('auth.register') }}">Регистрация</a></p>
-    </form>
 @endsection
